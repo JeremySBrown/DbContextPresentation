@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCamp.Models", "CodeCamp.Models\CodeCamp.Models.csproj", "{3A6CBBB5-5C50-4030-AC3A-C7E64B8003B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCamp.Datasource", "CodeCamp.Datasource\CodeCamp.Datasource.csproj", "{189FBAB1-0369-4714-AB11-D10CA8BC4841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCamp.Tests", "CodeCamp.Tests\CodeCamp.Tests.csproj", "{7E0C30A8-9000-46AA-9053-FAD70B7736EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CE7A460-FBED-4178-A834-DFB6867EF4A7}"
+	ProjectSection(SolutionItems) = preProject
+		DbContext Demo.vsmdi = DbContext Demo.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = DbContext Demo.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A6CBBB5-5C50-4030-AC3A-C7E64B8003B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6CBBB5-5C50-4030-AC3A-C7E64B8003B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6CBBB5-5C50-4030-AC3A-C7E64B8003B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6CBBB5-5C50-4030-AC3A-C7E64B8003B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189FBAB1-0369-4714-AB11-D10CA8BC4841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189FBAB1-0369-4714-AB11-D10CA8BC4841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189FBAB1-0369-4714-AB11-D10CA8BC4841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189FBAB1-0369-4714-AB11-D10CA8BC4841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E0C30A8-9000-46AA-9053-FAD70B7736EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E0C30A8-9000-46AA-9053-FAD70B7736EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E0C30A8-9000-46AA-9053-FAD70B7736EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E0C30A8-9000-46AA-9053-FAD70B7736EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
