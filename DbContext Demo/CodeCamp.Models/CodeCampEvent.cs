@@ -16,6 +16,6 @@ namespace CodeCamp.Models
         public DateTime EndDate { get; set; }
         public Location Location { get; set; }
 
-        public ICollection<EventSession> Topics { get; set; }
+        public virtual ICollection<EventSession> Topics { get; set; }
     }
 }

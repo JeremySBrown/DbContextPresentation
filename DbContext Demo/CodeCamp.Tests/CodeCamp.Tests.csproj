@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="CodeCampContextTests.cs" />
     <Compile Include="DropCreateDatabaseForTestingWithSeedData.cs" />
-    <Compile Include="LocalDataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers.cs" />
   </ItemGroup>
