@@ -9,20 +9,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CodeCamp.Tests
 {
     /// <summary>
-    /// Summary description for CodeCampContextTests
+    /// Summary description for LocalDataTests
     /// </summary>
     [TestClass]
-    public class CodeCampContextTests
+    public class LocalDataTests
     {
-        
-
-        public CodeCampContextTests()
+        public LocalDataTests()
         {
-            // Initialize Database and Context
             Database.SetInitializer(new DropCreateDatabaseForTestingWithSeedData());
         }
-
-
 
         private TestContext testContextInstance;
 
@@ -65,13 +60,15 @@ namespace CodeCamp.Tests
         #endregion
 
         [TestMethod]
-        public void SpeakerSeedDataCreatedProperly()
+        public void Using_Local_Data()
         {
-            using (CodeCampContext context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            using(CodeCampContext context = new CodeCampContext())
             {
-                context.Speakers.Load();
+                Assert.IsFalse(context.Speakers.Local.Any());
 
-                Assert.IsTrue(context.Speakers.Local.Any());
+                var speakers = context.Speakers.Where(s => s.Id < 3).ToList();
+
+                Assert.IsTrue(context.Speakers.Local.Count == 2);
             }
         }
     }
