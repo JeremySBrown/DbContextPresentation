@@ -16,16 +16,12 @@ namespace CodeCamp.Tests
     [TestClass]
     public class CodeCampContextTests
     {
-        
-
         public CodeCampContextTests()
         {
             // Initialize Database and Context
             Database.SetInitializer(new DropCreateDatabaseForTestingWithSeedData());
         }
-
-
-
+        
         private TestContext testContextInstance;
 
         /// <summary>
@@ -296,6 +292,56 @@ namespace CodeCamp.Tests
                 var checkSpeaker = query.FirstOrDefault();
 
                 Assert.IsNull(checkSpeaker);
+            }
+        }
+
+        [TestMethod]
+        public void Adding_Relationships()
+        {
+            // Add a new presentation through a Speaker's presentation collection.
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                Presentation presentation = new Presentation
+                                                {
+                                                    Title = "Another presentation about .NET"
+                                                };
+
+                Speaker speaker = context.Speakers.FirstOrDefault(s => s.LastName == "Pugh");
+
+                speaker.Presentations.Add(presentation);
+
+                context.SaveChanges();
+
+                var query = from p in context.Presentations
+                            where p.Speaker.LastName == "Pugh"
+                            select p;
+
+                Assert.AreEqual(2, query.Count());
+            }
+
+            // Add a speaker to a new presentation.
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                var query = from s in context.Speakers
+                            where s.Id == 1
+                            select s;
+
+                Speaker speaker = query.FirstOrDefault();
+
+                Presentation presentation = new Presentation
+                                                {
+                                                    Title = "More about REST",
+                                                    Speaker = speaker
+                                                };
+
+                context.Presentations.Add(presentation);
+                context.SaveChanges();
+
+                // Requery Speaker, this time get presentations.
+                speaker = query.Include(s => s.Presentations).FirstOrDefault();
+
+                Assert.AreEqual(2,speaker.Presentations.Count);
+
             }
         }
 

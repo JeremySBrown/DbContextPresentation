@@ -8,8 +8,8 @@ using CodeCamp.Models;
 
 namespace CodeCamp.Tests
 {
-    //public class DropCreateDatabaseForTestingWithSeedData : DropCreateDatabaseAlways<CodeCampContext>
-    public class DropCreateDatabaseForTestingWithSeedData : DropCreateDatabaseIfModelChanges<CodeCampContext> 
+    //public class DropCreateDatabaseForTestingWithSeedData : DropCreateDatabaseIfModelChanges<CodeCampContext> 
+    public class DropCreateDatabaseForTestingWithSeedData : DropCreateDatabaseAlways<CodeCampContext>
     {
         protected override void Seed(CodeCampContext context)
         {
