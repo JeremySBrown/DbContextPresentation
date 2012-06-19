@@ -296,7 +296,7 @@ namespace CodeCamp.Tests
         }
 
         [TestMethod]
-        public void Adding_Relationships()
+        public void CRUD_With_Relationships()
         {
             // Add a new presentation through a Speaker's presentation collection.
             using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
@@ -340,10 +340,48 @@ namespace CodeCamp.Tests
                 // Requery Speaker, this time get presentations.
                 speaker = query.Include(s => s.Presentations).FirstOrDefault();
 
-                Assert.AreEqual(2,speaker.Presentations.Count);
+                Assert.AreEqual(2, speaker.Presentations.Count);
 
+                Console.WriteLine("New Presentation added to existing Speaker");
+                foreach (var presentation1 in context.Presentations.Local)
+                {
+                    Console.WriteLine("Speaker: {0}, Presentation: {1}", presentation1.Speaker.FirstName, presentation1.Title);
+                }
+                Console.WriteLine();
+
+                // Change speaker of presentation
+                var speaker2 = context.Speakers.Include(s => s.Presentations).FirstOrDefault(s => s.Id == 8);
+                presentation.Speaker = speaker2;
+
+                context.SaveChanges();
+
+                Console.WriteLine("Presenation moved to a different speaker"); 
+                foreach (var presentation1 in context.Presentations.Local.OrderBy(p=>p.Speaker.LastName))
+                {
+                    Console.WriteLine("Speaker: {0}, Presentation: {1}", presentation1.Speaker.FirstName, presentation1.Title);
+                }
+                Console.WriteLine();
+
+                // Remove Presentation by setting Speaker to null in Presentation record.
+                presentation.Speaker = null; // This only works because Speaker is not required. If it was required an exception would be thrown on save.
+                
+                // Remove Presentation by removing it from the Presentation navigation property in Speaker;
+                Presentation presentation2 = speaker2.Presentations.FirstOrDefault();
+                speaker2.Presentations.Remove(presentation2);
+                
+                context.SaveChanges();
+
+                Console.WriteLine("Presenation removed. No longer assigned to any speaker.");
+                foreach (var presentation1 in context.Presentations.Local)
+                {
+                    Console.WriteLine("Speaker: {0}, Presentation: {1}", 
+                        presentation1.Speaker != null ? presentation1.Speaker.FirstName : "No Speaker Assigned", 
+                        presentation1.Title);
+                }
             }
         }
+
+        
 
     }
 }
