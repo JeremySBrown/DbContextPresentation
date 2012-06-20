@@ -115,7 +115,7 @@ namespace CodeCamp.Tests
                 // query of local data will return new record
                 var query2 = context.Speakers.Local.SingleOrDefault(s => s.Email == "testuser01@notarealemail.com");
                 Assert.IsNotNull(query2);
-
+               
             }
         }
 

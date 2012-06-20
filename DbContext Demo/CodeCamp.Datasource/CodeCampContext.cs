@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 using CodeCamp.Models;
 
 namespace CodeCamp.Datasource
@@ -19,6 +21,12 @@ namespace CodeCamp.Datasource
         {
             
         }
+
+        public ObjectContext ObjectContext
+        {
+            get { return ((IObjectContextAdapter)this).ObjectContext; }
+        }
+
 
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Presentation> Presentations { get; set; }
