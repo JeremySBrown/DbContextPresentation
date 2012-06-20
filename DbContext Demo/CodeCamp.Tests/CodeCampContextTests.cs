@@ -381,7 +381,116 @@ namespace CodeCamp.Tests
             }
         }
 
-        
+        [TestMethod]
+        public void Checking_State()
+        {
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                var speaker = context.Speakers.Find(1);
+                
+                Console.WriteLine("Before Edit");
+                Console.WriteLine("Speaker Email: {0}, State: {1}",speaker.Email, context.Entry(speaker).State);
+                Console.WriteLine("After Edit:");
+                speaker.Email = "new@email.com";
+                Console.WriteLine("Speaker Email: {0}, State: {1}", speaker.Email, context.Entry(speaker).State);
+            }
+        }
+
+        [TestMethod]
+        public void Working_With_Current_Orginal_DatabaseValues()
+        {
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                var speaker = context.Speakers.Find(1);
+                var entity = context.Entry(speaker);
+
+                // create a second DbContext to simulate change from another user.
+                using (var context2 = new CodeCampContext(TestHelpers.TestDatabaseName))
+                {
+                    var changeSpeaker = context2.Speakers.Find(1);
+                    changeSpeaker.Bio = "Bio has changed while you were out...";
+                    context2.SaveChanges();
+                }
+
+                Console.WriteLine("Current Values before edit");
+                TestHelpers.WritePropertyValues(entity.CurrentValues);
+
+                speaker.Email = "new@email.com";
+                speaker.TwitterAlias = "@steve";
+
+                Console.WriteLine("Current Values after edit");
+                TestHelpers.WritePropertyValues(entity.CurrentValues);
+
+                Console.WriteLine("Orginal Values");
+                TestHelpers.WritePropertyValues(entity.OriginalValues);
+
+                Console.WriteLine("Database Values (trip to database)");
+                TestHelpers.WritePropertyValues(entity.GetDatabaseValues());
+            }
+        }
+
+        [TestMethod]
+        public void ComlexTypes_With_Current_Orginal_DatabaseValues()
+        {
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                var codeCamp = context.CodeCampEvents.FirstOrDefault();
+                var entity = context.Entry(codeCamp);
+
+                // create a second DbContext to simulate change from another user.
+                using (var context2 = new CodeCampContext(TestHelpers.TestDatabaseName))
+                {
+                    var codeCamp2 = context2.CodeCampEvents.FirstOrDefault();
+                    codeCamp2.Location.StreetAddress2 = "Street 2 Changed";
+                    context2.SaveChanges();
+                }
+
+                Console.WriteLine("Current Values before edit");
+                TestHelpers.WritePropertyValues(entity.CurrentValues);
+
+                codeCamp.Location.StreetAddress2 = "Suite 101";
+                
+
+                Console.WriteLine("Current Values after edit");
+                TestHelpers.WritePropertyValues(entity.CurrentValues);
+
+                Console.WriteLine("Orginal Values");
+                TestHelpers.WritePropertyValues(entity.OriginalValues);
+
+                Console.WriteLine("Database Values (trip to database)");
+                TestHelpers.WritePropertyValues(entity.GetDatabaseValues());
+            }
+        }
+
+        [TestMethod]
+        public void Attaching_Disconnected_Entities()
+        {
+            Speaker speaker;
+
+            // Get speaker from one context.
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                speaker = context.Speakers.FirstOrDefault(s => s.FirstName == "Chip");
+                Console.WriteLine("State before edit: {0}", context.Entry(speaker).State);
+
+            }
+
+            // Change speaker out side of context
+            speaker.Bio = "Bio has changed";
+
+            //Save changes using a second context.
+            using (var context = new CodeCampContext(TestHelpers.TestDatabaseName))
+            {
+                // Attach speaker
+                context.Speakers.Attach(speaker); // speaker will be unchanged becuase it was just added to the context
+                Console.WriteLine("State after edit (attached only): {0}", context.Entry(speaker).State);
+                
+                // must manually change state
+                context.Entry(speaker).State = EntityState.Modified; // This line alone will attach and set the state. No need to call Attach
+                
+                Console.WriteLine("State after edit (after setting state): {0}", context.Entry(speaker).State);
+            }
+        }
 
     }
 }

@@ -153,6 +153,7 @@ namespace CodeCamp.Tests
             context.Speakers.Add(kevinHennessy);
             context.Speakers.Add(jamesDixon);
             context.Speakers.Add(robZelt);
+            context.Speakers.Add(chipBurris);
             context.Speakers.Add(dianeWilson);
             context.Speakers.Add(chrisEargle);
             context.Speakers.Add(gregPugh);
