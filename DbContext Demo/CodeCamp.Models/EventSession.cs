@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodeCamp.Models
 {
@@ -21,10 +22,17 @@ namespace CodeCamp.Models
 
         public int Id { get; set; }
         public SessionType SessionType { get; set; }
-        public DateTime StartTime { get; set; }
+        
+        [Required]
+        public DateTime? StartTime { get; set; }
         public TimeSpan Duration { get; set; }
+        
+        [Required]
         public string Track { get; set; }
+
+        [Required]
         public string Room { get; set; }
+
         public Presentation Presentation { get; set; }
     }
 }

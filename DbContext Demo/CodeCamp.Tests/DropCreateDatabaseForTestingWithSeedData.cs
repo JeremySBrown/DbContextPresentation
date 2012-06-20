@@ -21,6 +21,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Steve",
                         LastName = "Suing",
+                        Email = "steve@suing.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation {Title = "Rest API's"}
@@ -32,6 +33,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Matt",
                         LastName = "Duffield",
+                        Email = "matt@duffield.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -47,6 +49,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Kevin",
                         LastName = "Hennessy",
+                        Email = "kevin@hennessy.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -61,6 +64,7 @@ namespace CodeCamp.Tests
                 {
                     FirstName = "Rob",
                     LastName = "Zelt",
+                    Email = "rob@zelt.com",
                     Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -75,6 +79,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "James",
                         LastName = "Dixon",
+                        Email = "james@dixon.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -90,6 +95,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Chip",
                         LastName = "Burris",
+                        Email = "chip@burris.xxx",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -105,6 +111,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Diane",
                         LastName = "Wilson",
+                        Email = "diane@wilson.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -119,6 +126,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Chris",
                         LastName = "Eargle",
+                        Email = "chris@eargle.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
@@ -139,6 +147,7 @@ namespace CodeCamp.Tests
                     {
                         FirstName = "Greg",
                         LastName = "Pugh",
+                        Email = "greg@pugh.com",
                         Presentations = new Collection<Presentation>(new[]
                                                                          {
                                                                              new Presentation
